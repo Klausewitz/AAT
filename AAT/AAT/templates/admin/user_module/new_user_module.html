@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+<!-- title -->
+{% block title %}
+    Enrolment of user {{ user.username }}
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+<br>
+<h2>Add new user module permission for user {{ user.username }}</h2>
+<br>
+<a class="btn btn-primary" href="/dashboard/edit_permission/{{user.id}}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+    < back
+</a>    
+<br> 
+<!-- submit form for module -->
+<div class="container-fluid px-4 py-4">
+    <form method="POST" class="form-signin">
+        {{ form.hidden_tag() }} 
+        {{ form.csrf_token }}
+        {{ form.choices(class='form-check') }}
+        <br>
+        {{ form.submit(class='btn btn-lg btn-block btn-primary') }}
+    </form>
+</div>
+{% endblock %}
+<!--
+    {% for module in form.data %}
+        {{ form.module.label }}
+        {{ form.module(size=40) }}
+    {% endfor %}
+-->

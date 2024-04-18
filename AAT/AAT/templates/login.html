@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+<!-- title -->
+{% block title %}
+    Login
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+<div class="container-xl">
+    <form method="POST" class="form-signin">
+        {{ form.hidden_tag() }}
+        <br>
+        <h1 class="h3 mb-3 font-weight-normal">
+            Login
+        </h1>
+        <br>
+        <div class="form-floating">
+            {{ form.username(class="form-control", placeholder="Please input username") }}
+            {{ form.username.label() }}
+        </div>
+        <br>
+        <div class="form-floating">
+            {{ form.password(class="form-control", placeholder="Please input password") }}
+            {{ form.password.label() }}
+        </div>
+        <br>
+        {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+    </form>
+</div>
+{% endblock %}
+

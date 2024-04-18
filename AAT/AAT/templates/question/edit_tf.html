@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+<!-- title -->
+{% block title %}
+    {% if edit %}
+    Edit question
+    {% else %}
+    New true or false question
+    {% endif %}
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+    <!-- submit form for module -->
+    <div class="container-fluid px-4 py-4">
+        <form method="POST" class="form-signin">
+            {{ form.hidden_tag() }}
+                <a class="btn btn-primary" href="/module/{{module_id}}/question_bank/tf" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+                    < back
+                </a> 
+                <br>  
+                <br>
+                <h1 class="h3 mb-3 font-weight-normal">
+                    {% if edit %}
+                    Edit question
+                    {% else %}
+                    New true or false question
+                    {% endif %}
+                </h1>
+                <br>
+                {{ form.tag.label() }}
+                {{ form.tag(class="form-control", placeholder='tag') }}
+                <br>
+                {{ form.difficulty.label() }}
+                {{ form.difficulty(class="form-control", placeholder='difficulty') }}
+                <br>
+                {{ form.point.label() }}
+                {{ form.point(class="form-control", placeholder='point') }}
+                <br>
+                {{ form.question.label() }}
+                {{ form.question(class="form-control content_height", placeholder='question') }}
+                <br>
+                {{ form.corr_answer.label() }}
+                {{ form.corr_answer(class="form-control", placeholder='correct answer') }}
+                <br>
+                {{ form.submit(class='btn btn-lg btn-block btn-primary') }}
+        </form>
+    </div>
+    
+{% endblock %}

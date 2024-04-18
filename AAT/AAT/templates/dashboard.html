@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+<!-- title -->
+{% block title %}
+dashboard
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+<br>
+<h2>
+    Hello {{ current_user.username }}! 
+</h2>
+<!-- admin page -->
+{% if current_user.is_staff == 2 %} 
+<!-- edit user database -->
+<div class="card mt-4" style="background-color: #efeae2">
+    <div class="card-header">
+        Edit user database  
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            <a class="btn btn-primary" href="{{ url_for('new_user') }}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+                Add new user
+            </a>            
+            <a class="btn btn-primary" href="{{ url_for('edit_all_users') }}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+                Edit current users
+            </a>
+        </p>
+    </div>    
+</div>
+<br>
+<!-- edit module database -->
+<div class="card mt-4" style="background-color: #efeae2">
+    <div class="card-header">
+        Edit module database  
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            <a class="btn btn-primary" href="{{ url_for('new_module') }}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+                Add new module
+            </a>            
+            <a class="btn btn-primary" href="{{ url_for('edit_all_modules') }}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+                Edit current modules
+            </a>
+        </p>
+    </div>    
+</div>
+<br>
+<!-- edit user_module database -->
+<div class="card mt-4" style="background-color: #efeae2">
+    <div class="card-header">
+        Amend user permission
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            <a class="btn btn-primary" href="{{ url_for('edit_permission_all_users') }}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+                Show user permission list
+            </a>    
+        </p>
+    </div>    
+</div>
+<br>
+<!-- student / staff page -->
+{% else %}
+<div  class="container-xl">
+    {% for module in modules %}
+    <div class="card mt-4" style="background-color: #DAE1DE">
+        <div class="card-body">
+            <p class="card-text">
+                <a class="btn fs-6" href="/module/{{ module.id }}">{{ module.code }} {{ module.name }}</a>  
+            </p>             
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}

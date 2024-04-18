@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+<!-- title -->
+{% block title %}
+    User permisssions
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+<br>
+<h2>User permission</h2>
+<br>
+<div  class="container-xl">
+    {% for module in modules %}
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">{{ module.code }} {{ module.name }}</label>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

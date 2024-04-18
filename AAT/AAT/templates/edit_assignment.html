@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+<!-- title -->
+{% block title %}
+    {% if edit %}
+    Change assignment information
+    {% else %}
+    Add assignment
+    {% endif %}
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+    <!-- submit form for module -->
+    <div class="container-fluid px-4 py-4">
+        <form method="POST" class="form-signin">
+            {{ form.hidden_tag() }}
+                {% if edit %}
+                <a class="btn btn-primary" href="{{ url_for('module', module_id=module_id) }}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+                    < back
+                </a>  
+                {% else %}
+                <a class="btn btn-primary" href="{{ url_for('module', module_id=module_id) }}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+                    < back
+                </a>  
+                {% endif %}
+                <br>  
+                <br>
+                <h1 class="h3 mb-3 font-weight-normal">
+                    {% if edit %}
+                    Change assignment information
+                    {% else %}
+                    Add assignment
+                    {% endif %}
+                </h1>
+                <br>
+                {{ form.name.label() }}
+                {{ form.name(class="form-control", placeholder='assignment name') }}
+                <br>
+                {{ form.is_open.label() }}
+                {{ form.is_open(class="form-control", placeholder='is_open') }}
+                <br>
+                {{ form.max_attempts.label() }}
+                {{ form.max_attempts(class="form-control", placeholder='max_attempts') }}
+                <br>
+                {{ form.submit(class='btn btn-lg btn-block btn-primary') }}
+        </form>
+    </div>
+    
+{% endblock %}

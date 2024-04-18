@@ -1,0 +1,24 @@
+<!-- Delete assignment question Confirm -->
+<div class="modal fade" id="Modal-DeleteConfirm-{{ question.id }}"
+     tabindex="-1"
+     aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Remove the question</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="POST">
+            {{ delete_assignment_question_form.csrf_token() }}
+            {{ delete_assignment_question_form.id(value=question.id) }}
+        <div class="modal-body">
+          <h4 class="text-center">Remove the question from {{ assignment.name }}</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cancel</button>
+          <button type="submit" class="btn btn-primary">confirm</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

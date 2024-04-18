@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+<!-- title -->
+{% block title %}
+    Current {{question_type}} questions of assignment {{ assignment.name }}
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+<br>
+<h2>Current {{question_type}} questions of assignment {{ assignment.name }}</h2>
+<br>
+<!--<a class="btn btn-primary" href="#" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+    < back
+</a>    
+<br> -->
+<div  class="container-xl">
+    {% for question in questions %}
+    {% include 'popup/del_assignment_question_popup.html' %}
+    <div class="card mt-4" style="background-color: #DAE1DE">
+        <div class="card-body">
+            <p class="card-text"> 
+                Question({{question.tag}}): {{question.question}}       
+                <!-- delete -->
+                <small class="text-body-secondary">
+                    <button class="btn" data-bs-toggle="modal" data-bs-target="#Modal-DeleteConfirm-{{ question.id }}" style="font-weight: 500">Remove</button>
+                </small>
+            </p>             
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<br>
+<div class="container-xl">
+    <a class="btn fs-6" style="background-color: #DAE1DE; border: 3px; color: black; font-weight: 700;" href="{{url_for('new_assignment_question', module_id=module.id, question_type=question_type, assignment_id=assignment.id)}}">Add new question</a>  
+</div>
+{% endblock %}

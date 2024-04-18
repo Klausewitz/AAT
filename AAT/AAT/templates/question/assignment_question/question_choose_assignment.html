@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+<!-- title -->
+{% block title %}
+Choose assignment
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+<br>
+<a class="btn btn-primary" href="/module/{{module.id}}/question_bank/{{question_type}}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+    < back
+</a>    
+<br> 
+<br>
+<h2>
+    Please choose the assignment you would like to assign the questions:
+</h2>
+<br>
+<div  class="container-xl">
+    {% for assignment in assignments %}
+        <div class="card mt-4" style="background-color: #DAE1DE">
+            <div class="card-body">
+                <p class="card-text">
+                    <a class="btn fs-6" href="/module/{{module.id}}/assign_question/{{question_type}}/{{assignment.id}}">{{ module.code }} {{ assignment.name }}</a>
+                </p>             
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

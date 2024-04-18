@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+<!-- title -->
+{% block title %}
+{{ module.code }} {{ module.name }}
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+<br>
+<a class="btn btn-primary" href="{{ url_for('dashboard') }}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+    < back
+</a>    
+<br> 
+<br>
+<h2>
+    {{ module.code }} {{ module.name }}
+</h2>
+<br>
+<div  class="container-xl">
+    {% if current_user.is_staff != 0 %}
+        {% for assignment in assignments %}
+            <div class="card mt-4" style="background-color: #DAE1DE"> <!--DAE1DE  efeae2 -->
+                {% if current_user.is_staff == 1 %} 
+                <div class="card-header">
+                    <a class="btn fs-6" href="/module/{{module.id}}/assignment/{{assignment.id}}">{{ module.code }} {{ assignment.name }}</a>
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <p class="card-text">
+                        {% if current_user.is_staff != 1  %}
+                        <a class="btn fs-6" href="/module/{{module.id}}/assignment/{{assignment.id}}">{{ module.code }} {{ assignment.name }}</a>
+                        {% else %} 
+                        {% include 'popup/del_assignment_popup.html' %}
+                        <a class="btn btn-primary" href="/module/{{module.id}}/edit_assignment/{{assignment.id}}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+                            edit rule
+                        </a>  
+                        <a class="btn btn-primary" href="{{ url_for('assign_question_choose', module_id=module.id, assignment_id=assignment.id) }}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+                            add questions
+                        </a> 
+                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal-DeleteConfirm-{{ assignment.id }}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+                            delete
+                        </a> 
+                        {% endif %}
+                    </p>             
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        {% for assignment in assignments %}
+            {% if assignment.is_open != 0 %}
+                <div class="card mt-4" style="background-color: #DAE1DE">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <a class="btn fs-6" href="#">{{ module.code }} {{ assignment.name }}</a>  
+                        </p>             
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <br>
+    {% if current_user.is_staff == 1 %}
+    <a class="btn fs-6" style="background-color: #DAE1DE; border: 3px; color: black; font-weight: 700;" href="/module/{{module.id}}/new_assignment"> 
+        Create new assignment
+    </a> 
+    <a class="btn fs-6" style="background-color: #DAE1DE; border: 3px; color: black; font-weight: 700;" href="/module/{{module.id}}/question_bank/choose"> 
+        Question bank
+    </a>  
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+<!-- title -->
+{% block title %}
+    Current Modules of user {{ user.username }}
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+<br>
+<h2>Current modules for user {{ user.username }}</h2>
+<br>
+<a class="btn btn-primary" href="{{ url_for('edit_permission_all_users') }}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+    < back
+</a>    
+<br> 
+<div  class="container-xl">
+    {% for module in modules %}
+    {% if delete %}
+        {% include 'popup/del_user_module_popup.html' %}
+    {% endif %}  
+    <div class="card mt-4" style="background-color: #DAE1DE">
+        <div class="card-body">
+            <p class="card-text">         
+                {% if delete %}
+                <!-- delete module -->
+                <small class="text-body-secondary">
+                    <button class="btn" data-bs-toggle="modal" data-bs-target="#Modal-DeleteConfirm-{{ module.id }}" style="font-weight: 500">Remove permission on {{ module.code }} {{ module.name }}</button>
+                </small>
+                {% endif %}
+            </p>             
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<br>
+<div class="container-xl">
+    <a class="btn fs-6" style="background-color: #DAE1DE; border: 3px; color: black; font-weight: 700;" href="/dashboard/edit_permission/{{user.id}}/add">Add new user module permission</a>  
+</div>
+{% endblock %}

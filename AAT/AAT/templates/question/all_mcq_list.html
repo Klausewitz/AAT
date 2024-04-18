@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+<!-- title -->
+{% block title %}
+Question bank
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+<br>
+<a class="btn btn-primary" href="/module/{{module.id}}/question_bank/choose" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+    < back
+</a>    
+<br> 
+<br>
+<h2>
+    All multiple choices questions for module {{ module.code }}
+</h2>
+<br>
+<div  class="container-xl">
+    {% for question in questions %}
+    <div class="card mt-4" style="background-color: #DAE1DE">
+        <div class="card-body">
+            <p class="card-text">
+                <a class="btn fs-6" href="{{ url_for('edit_mcq', module_id=module.id, mcq_id=question.id) }}">{{ question.question }}</a>  
+            </p>   
+            {% if current_user.is_staff == 1 %}
+            {% include 'popup/del_question_popup.html' %}
+            <small class="text-body-secondary">
+                <button class="btn" data-bs-toggle="modal" data-bs-target="#Modal-DeleteConfirm-{{ question.id }}">delete</button>
+            </small>
+            {% endif %}          
+        </div>
+    </div>
+    {% endfor %}
+    <br>
+    {% if current_user.is_staff == 1 %}
+    <a class="btn fs-6" style="background-color: #DAE1DE; border: 3px; color: black; font-weight: 700;" href="/module/{{module.id}}/question_bank/mcq/new"> 
+        Add new question
+    </a> 
+    <a class="btn fs-6" style="background-color: #DAE1DE; border: 3px; color: black; font-weight: 700;" href="{{url_for('question_choose_assignment', module_id=module.id, question_type='mcq')}}"> 
+        Assign questions to assignment
+    </a>  
+    {% endif %}
+</div>
+
+{% endblock %}

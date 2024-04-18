@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+<!-- title -->
+{% block title %}
+    {{ module.code }} {{ assignment.name }}
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+<br>
+<a class="btn btn-primary" href="{{ url_for('module', module_id=module.id) }}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+    < back
+</a>    
+<br> 
+<br>
+<h2>
+    {{ module.code }} {{ assignment.name }}
+</h2>
+<br>
+<!-- admin / staff page -->
+{% if current_user.is_staff != 0 %} 
+<div  class="container-xl">
+    <h4>All questions:</h4>
+    {% for mcq in mcqs %}
+    <div class="card mt-4" style="background-color: #DAE1DE">
+        <div class="card-body">
+            <p class="card-text"> 
+                MCQ ({{mcq.tag}}): {{mcq.question}}       
+            </p>             
+        </div>
+    </div>
+    {% endfor %}
+    {% for tf in tfs %}
+    <div class="card mt-4" style="background-color: #DAE1DE">
+        <div class="card-body">
+            <p class="card-text"> 
+                TF ({{tf.tag}}): {{tf.question}}       
+            </p>             
+        </div>
+    </div>
+    {% endfor %}
+    <br>
+    admin & staff page
+    Should include:
+    data vistalisation 
+    click into students attempts 
+    make comments on students answers
+</div>
+<!-- student page -->
+{% else %}
+<div  class="container-xl">
+    student page
+    Should include:
+    assignment info
+    start button
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+<!-- title -->
+{% block title %}
+Assign question to assignment
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+<br>
+<a class="btn btn-primary" href="{{ url_for('module', module_id=module.id) }}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+    < back
+</a>    
+<br> 
+<br>
+<h2>
+    Please choose the type of the question you would like to assign:
+</h2>
+<br>
+<div  class="container-xl">
+    <div class="card mt-4" style="background-color: #DAE1DE">
+        <div class="card-body">
+            <p class="card-text">
+                <a class="btn fs-6" href="/module/{{module.id}}/assign_question/mcq/{{assignment.id}}">Multiple choices questions</a>  
+            </p>             
+        </div>
+    </div>
+    <div class="card mt-4" style="background-color: #DAE1DE">
+        <div class="card-body">
+            <p class="card-text">
+                <a class="btn fs-6" href="/module/{{module.id}}/assign_question/tf/{{assignment.id}}">True and false questions</a>  
+            </p>             
+        </div>
+    </div>
+</div>
+
+{% endblock %}

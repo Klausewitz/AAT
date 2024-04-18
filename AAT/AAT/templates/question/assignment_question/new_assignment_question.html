@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+<!-- title -->
+{% block title %}
+    Add new questions to {{ assignment.name }}
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+<br>
+<h2>Add new questions to {{ assignment.name }}</h2>
+<br>
+<a class="btn btn-primary" href="{{url_for('assignment_all_question', module_id=module.id, question_type=question_type, assignment_id=assignment.id)}}" role="button" style="background-color: #DAE1DE; border: 0px; color: black; font-weight: 700;"> 
+    < back
+</a>    
+<br> 
+<div class="container-fluid px-4 py-4">
+    <form method="POST" class="form-signin">
+        {{ form.hidden_tag() }} 
+        {{ form.csrf_token }}
+        {{ form.choices(class='form-check') }}
+        <br>
+        {{ form.submit(class='btn btn-lg btn-block btn-primary') }}
+    </form>
+</div>
+{% endblock %}
